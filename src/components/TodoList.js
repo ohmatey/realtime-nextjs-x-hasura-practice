@@ -1,10 +1,10 @@
 import React from 'react'
 import { useSubscription } from '@apollo/react-hooks'
 
-import { GET_TODOS } from '../modules/todos/actions'
+import useTodos from '../modules/todos/hooks/useTodos'
 
 const TodoList = () => {
-  const { data, loading, error } = useSubscription(GET_TODOS)
+  const { data, loading, error } = useTodos()
 
   if (error) {
     console.log(error)
