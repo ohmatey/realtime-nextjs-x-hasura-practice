@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useSubscription } from '@apollo/react-hooks'
 
 import { GET_TODOS } from '../actions'
@@ -9,8 +9,10 @@ export const TodosContext = React.createContext({
   error: null
 })
 
-export const TodosProvider = Component => props => {
-  const { data, loading, error } = useSubscription(GET_TODOS)
+export const TodosProvider = ({
+  children
+}) => {
+  const { data = {}, loading, error } = useSubscription(GET_TODOS)
 
   const {
     todos = []
@@ -18,7 +20,7 @@ export const TodosProvider = Component => props => {
 
   return (
     <TodosContext.Provider value={{ todos, error, loading }}>
-      <Component {...props} />
+      {children}
     </TodosContext.Provider>
   )
 }
